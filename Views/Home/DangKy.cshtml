@@ -1,0 +1,92 @@
+﻿@using CaptchaMvc.HtmlHelpers
+@using CaptchaMvc
+@using WebApplication1.Models
+@model ThanhVien
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Layout/Product.cshtml";
+}
+
+<div class="col-md-9 product-price">
+    <div class="register">
+        <h1>Đăng ký</h1>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <hr/>
+            @Html.ValidationSummary(true)
+    <div class="col-md-6 register-top-grid">
+        <h3>Thông tin cá nhân</h3>
+        <div>
+            <span>@Html.LabelFor(model => model.TaiKhoan, new {@class="control-label col-md-2"})</span>
+            @Html.TextBoxFor(model=>model.TaiKhoan,new {@class="cTaiKhoan"})
+            @Html.ValidationMessageFor(model=>model.TaiKhoan)
+        </div>
+
+        <div>
+            <span>Họ và tên</span>
+            @Html.TextBox("HoTen")
+        </div>
+
+        <div>
+            <span>Địa chỉ</span>
+            @Html.TextBox("DiaChi")
+        </div>
+
+        <div>
+            <span>Email</span>
+            @Html.TextBox("Email")
+        </div>
+        <div>
+            <span>Số điện thoại</span>
+            @Html.TextBox("SoDienThoai")
+        </div>
+
+    </div>
+            <div class="col-md-6 register-bottom-grid">
+                <h3>Thông tin đăng nhập</h3>
+                <div>
+                    <span>Mật khẩu</span>
+                    @Html.Password("MatKhau")
+                </div>
+                <div>
+                    <span>Xác nhận mật khẩu</span>
+                    @Html.Password("NhapLaiMatKhau")
+                </div>
+                <div>
+                    <span>Câu hỏi bí mật</span>
+                    @Html.DropDownList("CauHoi")
+                </div>
+                <div>
+                    <span>Câu trả lời</span>
+                    @Html.TextBox("CauTraLoi")
+
+                </div>
+
+                <div>
+                    @Html.Captcha(5)
+                </div>
+
+                <input type="submit" value="Gửi">
+
+            </div>
+            <div class="clearfix"> </div>
+        }
+
+
+    </div>
+</div>
+
+
+<h1 style="color:red">@ViewBag.ThongBao</h1>
+
+<style>
+    .titleclass{
+        margin-top:1%;
+        text-align:left;
+    }
+</style>
+
+<script>
+    $(".titleclass").find("a").prop("href", "#a");
+</script>

@@ -1,0 +1,55 @@
+﻿@using WebApplication1.Models
+@using PagedList.Mvc;
+
+@model PagedList.IPagedList<SanPham>
+
+@{
+    ViewBag.Title = "SanPhamTheoLoai";
+    Layout = "~/Views/Layout/Product.cshtml";
+}
+
+<div class="col-md-9 product1">
+    <div class=" bottom-product">
+        @{
+            int i = 0;
+            foreach (var item in Model.OrderBy(m=>m.DonGia))
+            {
+                i++;
+
+
+                <div class="col-md-4 bottom-cd simpleCart_shelfItem">
+                    <div class="product-at ">
+                        <a href="@Url.RouteUrl("XemChiTiet", new {@id=item.MaSP,@tensp=item.TenSP})">
+
+                            <img class="img-responsive" src="@Url.Content("~/Content/HinhAnhSP/"+item.HinhAnh)" alt="SPTL" style="width:150px;height:150px;">
+                            <div class="pro-grid">
+                                <span class="buy-in">Mua</span>
+                            </div>
+                        </a>
+                    </div>
+                    <p class="tun">@item.TenSP</p>
+                    <a href="@Url.Action("ThemGioHang", "GioHang", new {@MaSP=item.MaSP,@strURL=Request.Url.ToString()})" class="item_add">
+                        <p class="number item_price"><i> </i>@item.DonGia.Value.ToString("#,##") VNĐ</p>
+                    </a>
+                </div>
+
+
+                if (i % 4 == 0)
+                {
+                    <div style="clear:both"></div>
+                }
+            }
+            <div class="clearfix"> </div>
+        }
+
+    </div>
+</div>
+
+<hr>
+<!-- Pagination -->
+<div class="w3-center w3-padding-32">
+    <div class="w3-bar">
+        <a href="#" class="w3-bar-item w3-button w3-hover-black">@Html.PagedListPager(Model,page => Url.Action("SanPhamTheoLoai", new { page = page,@MaLoai=ViewBag.MaLoai,@MaNSX=ViewBag.MaNSX}))</a>
+    </div>
+</div>
+

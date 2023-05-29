@@ -1,0 +1,17 @@
+﻿@using WebApplication1.Models;
+@model List<ThanhVien>
+@{
+    ViewBag.Title = "GroupDuLieu";
+}
+@foreach(var g in Model.GroupBy(n => n.MaLoaiTV))
+            {
+                <div>@g.Key</div>
+                foreach(var item in g)
+                {
+                    <p>@item.TaiKhoan</p>
+
+                }
+                
+            }
+
+
